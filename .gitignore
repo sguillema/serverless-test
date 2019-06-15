@@ -1,0 +1,6 @@
+# Ignore the monstrosity that is node_modules
+node_modules
+# Ignore environment variables
+.env
+# Ignore build folders
+.*/

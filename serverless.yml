@@ -1,0 +1,29 @@
+service: service-test1
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-webpack
+
+custom:
+  webpack:
+    # webpackConfig: 'webpack.config.js'   # Name of webpack configuration file
+    includeModules:   # Node modules configuration for packaging
+      packagePath: 'package.json' # relative path to custom package.json file.
+    # packager: 'npm'   # Packager that will be used to package your external modules
+    # excludeFiles: src/**/*.test.js # Provide a glob for files to ignore
+  dotenv:
+    basePath: ../../
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: ${env:REGION}
+  role: ${env:ROLE}
+
+functions:
+  app:
+    handler: services/test1/index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
